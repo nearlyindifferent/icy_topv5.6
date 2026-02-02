@@ -47,15 +47,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        cyber: {
-          green: "hsl(var(--cyber-green))",
-          void: "hsl(var(--deep-void))",
-          surface: "hsl(var(--surface))",
-        },
+        success: "hsl(var(--success))",
+        helper: "hsl(var(--helper))",
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Inter', 'San Francisco', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -71,27 +68,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "pulse-glow": {
-          "0%, 100%": { 
-            boxShadow: "0 0 15px hsl(var(--primary) / 0.6)" 
-          },
-          "50%": { 
-            boxShadow: "0 0 25px hsl(var(--primary) / 0.8)" 
-          },
-        },
-        "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "float": "float 3s ease-in-out infinite",
-      },
-      backgroundImage: {
-        'cyber-gradient': 'linear-gradient(135deg, hsl(var(--primary)), hsl(160 100% 40%))',
       },
     },
   },
