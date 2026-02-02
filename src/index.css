@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* ICY_OPS Deep Void Color System */
+    /* ICY_OPS Deep Void Color System (Dark Mode) */
     --background: 0 0% 2%; /* #050505 */
     --foreground: 0 0% 93%; /* #EDEDED */
     
@@ -45,6 +45,48 @@
     --surface-border: 0 0% 13%;
     --text-primary: 0 0% 93%;
     --text-muted: 0 0% 45%;
+    
+    /* Hive accent (Indigo) */
+    --hive-accent: 239 84% 67%;
+  }
+
+  /* Sterile Blueprint Light Mode */
+  .light {
+    --background: 216 15% 95%; /* #F0F2F5 */
+    --foreground: 222 47% 11%; /* #0F172A Slate 900 */
+    
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: 135 100% 35%; /* Darker green for light mode */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 214 32% 91%; /* #E5E7EB */
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%; /* Slate 500 */
+    
+    --accent: 135 100% 35%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 80%; /* #CBD5E1 Slate 300 */
+    --input: 214 32% 80%;
+    --ring: 135 100% 35%;
+    
+    /* Light mode custom tokens */
+    --surface: 0 0% 100%;
+    --surface-border: 214 32% 80%;
+    --text-primary: 222 47% 11%;
+    --text-muted: 215 16% 47%;
+    
+    --hive-accent: 239 84% 67%;
   }
 
   .dark {
