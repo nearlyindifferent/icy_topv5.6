@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, Send } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -14,7 +14,7 @@ export const AgentTerminal = () => {
     {
       id: '1',
       type: 'agent',
-      content: 'AGENT_V3 ONLINE. READY.',
+      content: 'Ready. How can I help?',
       timestamp: new Date(),
     },
   ]);
@@ -46,14 +46,12 @@ export const AgentTerminal = () => {
     setInput('');
     setIsTyping(true);
 
-    // Simulate agent response with typewriter effect
     setTimeout(() => {
       const responses = [
-        'PROCESSING REQUEST...',
-        'EXECUTING COMMAND: ' + input.toUpperCase(),
-        'OPERATION COMPLETE. AWAITING NEXT DIRECTIVE.',
-        'ANALYZING DATA STREAMS... PATTERNS DETECTED.',
-        'SYSTEM INTEGRITY VERIFIED. ALL PROTOCOLS ACTIVE.',
+        'Processing your request...',
+        'Here\'s what I found based on your query.',
+        'Done. Is there anything else you need?',
+        'I\'ve analyzed the data. Ready for next steps.',
       ];
       
       const agentMessage: Message = {
@@ -65,16 +63,15 @@ export const AgentTerminal = () => {
       
       setMessages(prev => [...prev, agentMessage]);
       setIsTyping(false);
-    }, 1500);
+    }, 1200);
   };
 
   return (
     <div className="min-h-screen pb-48 md:pl-24 px-4 md:px-8 flex flex-col">
       {/* Header */}
-      <header className="pt-8 pb-6 text-center">
-        <h1 className="text-sm font-mono uppercase tracking-terminal text-primary">
-          AGENT_V3 // ENCRYPTED
-        </h1>
+      <header className="pt-8 pb-6">
+        <h1 className="text-xl font-medium tracking-tight">Agent</h1>
+        <p className="text-sm text-muted-foreground mt-1">Your AI assistant</p>
       </header>
 
       {/* Messages */}
@@ -85,22 +82,21 @@ export const AgentTerminal = () => {
               key={message.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
               className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {message.type === 'agent' ? (
                 <div className="max-w-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Bot className="w-4 h-4 text-primary" />
-                    <span className="text-xs font-mono uppercase tracking-terminal text-primary">
-                      System
-                    </span>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground">Agent</span>
                   </div>
-                  <TypewriterText text={message.content} />
+                  <p className="text-sm text-foreground leading-relaxed">
+                    {message.content}
+                  </p>
                 </div>
               ) : (
-                <div className="max-w-lg">
-                  <p className="text-sm font-mono text-foreground bg-card/50 px-4 py-2 rounded-lg">
+                <div className="max-w-lg bubble-user">
+                  <p className="text-sm text-foreground">
                     {message.content}
                   </p>
                 </div>
@@ -115,10 +111,8 @@ export const AgentTerminal = () => {
             animate={{ opacity: 1 }}
             className="flex items-center gap-2"
           >
-            <Bot className="w-4 h-4 text-primary" />
-            <span className="text-sm font-mono text-muted-foreground">
-              Processing<span className="cursor-blink">█</span>
-            </span>
+            <Sparkles className="w-3.5 h-3.5 text-muted-foreground animate-pulse" />
+            <span className="text-sm text-muted-foreground">Thinking...</span>
           </motion.div>
         )}
         
@@ -131,8 +125,8 @@ export const AgentTerminal = () => {
         className="fixed bottom-28 md:bottom-8 left-4 right-4 md:left-28 md:right-8 max-w-2xl mx-auto"
       >
         <motion.div
-          className={`flex items-center gap-3 bg-black rounded-full px-4 py-3 border transition-all duration-300 ${
-            isFocused ? 'border-primary cyber-glow' : 'border-border'
+          className={`flex items-center gap-3 bg-card rounded-2xl px-4 py-3 border transition-colors duration-200 ${
+            isFocused ? 'border-muted-foreground/30' : 'border-border'
           }`}
         >
           <input
@@ -141,46 +135,19 @@ export const AgentTerminal = () => {
             onChange={(e) => setInput(e.target.value)}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="ENTER COMMAND..."
-            className="flex-1 bg-transparent text-sm font-mono uppercase tracking-terminal text-foreground placeholder:text-muted-foreground focus:outline-none"
+            placeholder="Ask anything..."
+            className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           <motion.button
             type="submit"
-            className="px-4 py-2 bg-primary text-primary-foreground font-mono text-sm uppercase tracking-terminal rounded-md"
-            whileTap={{ scale: 0.96 }}
+            disabled={!input.trim()}
+            className="text-sm font-medium text-foreground disabled:text-muted-foreground hover-bright"
+            whileTap={{ scale: 0.95 }}
           >
-            EXEC
+            Send
           </motion.button>
         </motion.div>
       </form>
     </div>
-  );
-};
-
-// Typewriter effect component
-const TypewriterText = ({ text }: { text: string }) => {
-  const [displayText, setDisplayText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < text.length) {
-        setDisplayText(text.slice(0, index + 1));
-        index++;
-      } else {
-        setIsComplete(true);
-        clearInterval(interval);
-      }
-    }, 30);
-
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return (
-    <p className="text-sm font-mono uppercase tracking-terminal text-foreground">
-      {displayText}
-      {!isComplete && <span className="cursor-blink">█</span>}
-    </p>
   );
 };
