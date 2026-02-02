@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FolderOpen, Bot, Settings, User } from 'lucide-react';
+import { Bot, MessageSquare, Zap, User } from 'lucide-react';
 
 interface NavigationProps {
   activeTab: string;
@@ -7,9 +7,9 @@ interface NavigationProps {
 }
 
 const navItems = [
-  { id: 'vault', icon: FolderOpen, label: 'Vault' },
   { id: 'agent', icon: Bot, label: 'Agent' },
-  { id: 'settings', icon: Settings, label: 'Settings' },
+  { id: 'hive', icon: MessageSquare, label: 'Hive' },
+  { id: 'nexus', icon: Zap, label: 'Nexus' },
   { id: 'profile', icon: User, label: 'Profile' },
 ];
 
@@ -30,7 +30,7 @@ export const Navigation = ({ activeTab, onTabChange }: NavigationProps) => {
                 <motion.div
                   layoutId="active-pill-mobile"
                   className="absolute inset-0 bg-primary rounded-full"
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               <item.icon 
@@ -57,7 +57,7 @@ export const Navigation = ({ activeTab, onTabChange }: NavigationProps) => {
                 <motion.div
                   layoutId="active-pill-desktop"
                   className="absolute inset-0 bg-primary rounded-full"
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               <item.icon 
